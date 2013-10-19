@@ -1,8 +1,8 @@
 Установка веб-сервера для разработки
 ====================================
 
-В настоящем руководсте кратко описан процесс установки веб-сервера
-с минимальным функционалом под 64-разрядую Windows 8.1.
+В настоящем руководстве кратко описан процесс установки веб-сервера
+с минимальным функционалом под 64-разрядную Windows 8.1.
 Однако инструкция применима также и к ранним версиями Windows.
 
 Это руководство охватывает только мой круг интересов, не претендует
@@ -16,7 +16,7 @@
 + Windows Server 2012 / R2 
 
 ### Инструкция
-1. Скачать бинарники и установщики:
+1. Скачать бинарники и/или установщики:
   + [Microsoft Visual C++ Redistributable][0] или [VC11 vcredist_x64/86.exe][01] (требуется для работы Апача)
   + [Apache][1] → [httpd-2.4.6-win64-VC11.zip][11]
   + [PHP][2] → [PHP 5.5.5 VC11 x64 Thread Safe][22]
@@ -29,9 +29,11 @@
 
 4. Отредактировать строки в `c:\server\apache\conf\httpd.conf`:
   + `ServerRoot "c:/Apache24"`<br />→ `ServerRoot "c:/server/apache"`
-  + `#ServerName www.example.com:80` *(закоментирована)*<br />→ `ServerName localhost`
+  + `#ServerName www.example.com:80` *(закомментирована)*<br />→ `ServerName localhost`
   + `DocumentRoot "c:/Apache24/htdocs"`<br />→ `DocumentRoot "c:/var/www"`
   + `DirectoryIndex index.html`<br />→ `DirectoryIndex index.php index.html`
+  + раскомментировать `#Include conf/extra/httpd-vhosts.conf`
+  + раскомментировать `#LoadModule rewrite_module modules/mod_rewrite.so`
 
 5. Блок `<Directory "c:/Apache24/htdocs"> … </Directory>` полностью заменить на:
 ```conf
@@ -65,8 +67,22 @@ extension=php_sqlite3.dll
 9. Сохранить конфиг
 10. Установить и запустить Апач. Для этого нужно в командной строке (`win+R → cmd`) ввести:
 ```
-C:\> server\apache\bin\httpd.exe -k install
-C:\> server\apache\bin\httpd.exe -k start
+с:\> server\apache\bin\httpd.exe -k install
+с:\> server\apache\bin\httpd.exe -k start
+```
+
+###Виртуальные хосты
+1. В файл `с:\Windows\System32\drivers\etc\hosts` добавить строку:
+```
+127.0.0.2 example.local
+```
+
+2. В файле `c:\server\apache\conf\extra\httpd-vhosts.conf` всё заменить на:
+```conf
+<VirtualHost *:80>
+    DocumentRoot "c:/var/www/example"
+    ServerName example.local
+</VirtualHost>
 ```
 
 [0]: http://rutracker.org/forum/viewtopic.php?t=3847203 "торрент"
