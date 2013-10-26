@@ -53,7 +53,7 @@ AddType application/x-httpd-php .php
 
 7. Сохранить конфиг
 
-8. Создать конфиг PHP `с:/server/php/php.ini` с содержимым:
+8. Создать конфиг PHP `с:\server\php\php.ini` с содержимым:
 ```ini
 extension_dir = "c:/server/php/ext/"
 extension=php_curl.dll
