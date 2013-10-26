@@ -53,7 +53,7 @@ AddType application/x-httpd-php .php
 
 7. Сохранить конфиг
 
-8. Создать конфиг PHP `с:\server\php\php.ini` с содержимым:
+8. Создать конфиг PHP `c:\server\php\php.ini` с содержимым:
 ```ini
 extension_dir = "c:/server/php/ext/"
 extension=php_curl.dll
@@ -67,12 +67,12 @@ extension=php_sqlite3.dll
 9. Сохранить конфиг
 10. Установить и запустить Апач. Для этого нужно в командной строке (`win+R → cmd`) ввести:
 ```
-с:\> server\apache\bin\httpd.exe -k install
-с:\> server\apache\bin\httpd.exe -k start
+c:\> server\apache\bin\httpd.exe -k install
+c:\> server\apache\bin\httpd.exe -k start
 ```
 
 ###Виртуальные хосты
-1. В файл `с:\Windows\System32\drivers\etc\hosts` добавить строку:
+1. В файл `c:\Windows\System32\drivers\etc\hosts` добавить строку:
 ```
 127.0.0.2 example.local
 ```
