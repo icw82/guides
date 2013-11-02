@@ -36,7 +36,7 @@
   + раскомментировать `#LoadModule rewrite_module modules/mod_rewrite.so`
 
 5. Блок `<Directory "c:/Apache24/htdocs"> … </Directory>` полностью заменить на:
-```conf
+```ApacheConf
 <Directory "c:/var/www">
   Options Indexes FollowSymLinks
   AllowOverride All
