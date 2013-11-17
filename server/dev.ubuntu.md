@@ -37,6 +37,7 @@ aptitude install nodejs
 ### Nginx
 ```Shell
 aptitude install nginx
+/etc/init.d/nginx start
 ```
 
 

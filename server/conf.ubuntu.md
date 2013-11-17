@@ -27,5 +27,22 @@ nano ~/.zshrc
 Изменения встапят в силу после релога.
 
 ### git
+```Shell
+aptitude install git
+```
 
 ### dropbox
+Актуальная инструкция на сайте [dropbox.com](https://www.dropbox.com/install?os=lnx)
+Нужно выйти с рута ```exit``` и пыполнять команды из-под пользователя.
+```Shell
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+~/.dropbox-dist/dropboxd
+```
+Скопировать ссылку и запустить её в браузере, чтобы привязать аккаунт.
+Далее:
+```Shell
+wget -O ~/dropbox.py "http://www.dropbox.com/download?dl=packages/dropbox.py"
+chmod 755 ~/dropbox.py
+sudo ln -s ~/dropbox.py /usr/local/bin/dropbox
+dropbox start
+```
