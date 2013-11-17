@@ -1,10 +1,16 @@
 Памятка по настройке Ubuntu.Server 13.*
 =======================================
 
+### Для начала
+```Shell
+sudo aptitude update
+```
+
 ### zsh
 #### Установка
 ```Shell
 sudo aptitude install zsh
+sudo chsh -s /bin/zsh root
 chsh -s /bin/zsh
 exit
 ```
@@ -17,7 +23,8 @@ exit
 nano ~/.zshrc
 ```
 Вставить в этот файл [сие](https://raw.github.com/icw82/storeroom/master/zsh/.zshrc.sh).
-
+То же самое нужно сделать для остальных пользователей (если нужно).
+Изменения встапят в силу после релога.
 
 ### git
 
