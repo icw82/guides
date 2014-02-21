@@ -33,7 +33,7 @@ aptitude install git
 
 ### dropbox
 Актуальная инструкция на сайте [dropbox.com](https://www.dropbox.com/install?os=lnx)
-Нужно выйти с рута ```exit``` и пыполнять команды из-под пользователя.
+Нужно выйти с рута ```exit``` и выполнять команды из-под пользователя.
 ```Shell
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 ~/.dropbox-dist/dropboxd
