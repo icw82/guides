@@ -53,6 +53,11 @@ nginx + apache (для старых проектов) + node.js (не готов
 
 4. Создать папку для проектов, требующих Apache → `c:\www\apache`.
 
+5. В файл `c:\Windows\System32\drivers\etc\hosts` добавить строку:
+```
+127.0.0.2 apache.local
+```
+
 ### Nginx
 1. Скрипты для [запуска](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-start.cmd)
     и [остановки](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-stop.cmd) сервера.
@@ -74,7 +79,6 @@ server {
         proxy_connect_timeout 120;
         proxy_send_timeout 120;
         proxy_read_timeout 180;
-        ##index  index.html index.htm;
     }
 
     location ~* \.(jpg|gif|png|ico|css|svg|js)$ {
@@ -131,12 +135,7 @@ c:\> server\Apache24\bin\httpd.exe -k start
 ```
 
 #### Виртуальные хосты Apache
-1. В файл `c:\Windows\System32\drivers\etc\hosts` добавить строку:
-```
-127.0.0.2 apache.local
-```
-
-2. В файле `c:\server\apache\conf\extra\httpd-vhosts.conf` всё заменить на:
+1. В файле `c:\server\apache\conf\extra\httpd-vhosts.conf` всё заменить на:
 ```conf
 <VirtualHost apache.local:8080>
     DocumentRoot "c:/www/apache"
@@ -144,11 +143,39 @@ c:\> server\Apache24\bin\httpd.exe -k start
 </VirtualHost>
 ```
 
-3. Перезапустить Nginx и Apache.
-
-### Nginx + PHP
+2. Перезапустить Nginx и Apache.
 
 ### Nginx + Python + Django
+1. Установить Python в папку C:\server\python27.
+
+2. К переменой PATH добавить (если нет):
+`C:\server\Python27;C:\server\Python27\Scripts;C:\server\Python27\Lib\site-packages`
+
+3. Следуя [инструкции](https://pypi.python.org/pypi/setuptools#windows-8-powershell), установить setuptools:
+```
+(Invoke-WebRequest https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py).Content | python -
+```
+
+4. Установить pip:
+```
+easy_install pip
+```
+
+4. Установить virtualenv:
+```
+pip install virtualenv
+```
+
+1) Запустил редактор локальной групповой политики
+2) Зашёл в раздел: Локальный компьютер `\Конфигурация компьютера\Административные шаблоны\Компоненты Windows\Windows PowerShell\`
+3) Параметр `Включить выполнение сценариев` был установлен на `Не задана`, поменял на `Включена` (параметры: `Разрешить локальные сценарии...`
+
+  .\.env\Scripts\activate.ps1
+
+
+
+
+### Nginx + PHP
 
 ### Nginx + Node.js
 
