@@ -29,6 +29,7 @@ nginx + apache (для старых проектов) + node.js (не готов
   + [PHP][05] → [PHP 5.5.10 VC11 x64 Thread Safe][06]
   + [Python][07] → [Windows X86-64 MSI Installer (2.7.6)][08]
   + [Node.js][09] → [node-v0.10.26-x64.msi][010]
+  + [Windows Service Wrapper][011] → [winsw-1.14-bin.exe][012]
 
 [00]: http://nginx.org/ru/download.html "nginx"
 [01]: http://nginx.org/download/nginx-1.5.12.zip
@@ -41,9 +42,11 @@ nginx + apache (для старых проектов) + node.js (не готов
 [08]: http://www.python.org/ftp/python/2.7.6/python-2.7.6.amd64.msi
 [09]: http://nodejs.org/download/
 [010]: http://nodejs.org/dist/v0.10.26/x64/node-v0.10.26-x64.msi
-
+[011]: https://github.com/kohsuke/winsw
+[012]: http://repo.jenkins-ci.org/releases/com/sun/winsw/winsw/1.14/winsw-1.14-bin.exe
 2. Раскидать по папкам:
   + Nginx → `c:\server\nginx`
+  + WinSW → `c:\server\nginx` (и переименовать файл в nginx-service.exe)
   + Apache → `c:\server\Apache24`
   + PHP → `c:\server\php`
 
@@ -59,11 +62,34 @@ nginx + apache (для старых проектов) + node.js (не готов
 ```
 
 ### Nginx
-1. Скрипты для [запуска](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-start.cmd)
-    и [остановки](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-stop.cmd) сервера.
+1. Создать `c:\server\nginx\nginx-service.xml` с содержимым:
+```xml
+<service>
+    <id>Nginx</id>
+    <name>Nginx</name>
+    <description>Nginx service</description>
+    <executable>c:\server\nginx\nginx.exe</executable>
+    <logpath>c:\server\nginx\logs</logpath>
+    <log mode="roll-by-size">
+        <sizeThreshold>10240</sizeThreshold>
+        <keepFiles>2</keepFiles>
+    </log>
+    <startargument></startargument>
+</service>
+```
+2. Устанавить сервис:
+```
+c:\server\nginx\nginx-service install
+```
 
-2. Запустить. По адресу http://localhost/ — должно быть приветствие «Welcome to nginx!».
-(консоль можно закрывать, сервер будет работать).
+3. Запустить службу.
+```
+net start nginx
+```
+
+4. Запустить. По адресу http://localhost/ — должно быть приветствие «Welcome to nginx!».
+
+'''Скрипты для ручного [запуска](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-start.cmd) и [остановки](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-stop.cmd) сервера.'''
 
 ### Nginx → Apache + PHP
 1. В конфиг `c:\server\nginx\conf\nginx.gonf` добавить блок:
@@ -161,18 +187,18 @@ c:\> server\Apache24\bin\httpd.exe -k start
 easy_install pip
 ```
 
-4. Установить virtualenv:
+5. Установить virtualenv:
 ```
 pip install virtualenv
 ```
-
+<!--
 1) Запустил редактор локальной групповой политики
 2) Зашёл в раздел: Локальный компьютер `\Конфигурация компьютера\Административные шаблоны\Компоненты Windows\Windows PowerShell\`
 3) Параметр `Включить выполнение сценариев` был установлен на `Не задана`, поменял на `Включена` (параметры: `Разрешить локальные сценарии...`
 
   .\.env\Scripts\activate.ps1
 
-
+-->
 
 
 ### Nginx + PHP
