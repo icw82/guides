@@ -1,7 +1,33 @@
-Памятка по настройке Ubuntu.Server 13.*
+Памятка по настройке Ubuntu.Server 14.*
 =======================================
 
-### Для начала
+### Настройка Wi-Fi с WPA/WPA2
+Создать файл с конфигурацией в ```/etc```:
+```Shell
+sudo wpa_passphrase {name} {password} > /etc/wpa_supplicant.conf
+```
+где
+
+* __{name}__ — ESSID, идентификатор беспроводной сети, имя сети;
+* __{password}__ — пароль сети;
+
+Открыть файл ```/etc/network/interfaces```:
+```Shell
+sudo nano /etc/network/interfaces
+```
+Добавить строки:
+```
+auto wlan0
+iface wlan0 inet dhcp
+pre-up sudo wpa_supplicant -B -iwlan0 -c/etc/wpa_supplicant.conf -Dwext
+post-down sudo killall -q wpa_supplicant
+```
+
+Сохранить и перезагрузиться.
+
+
+### Обновление пакетов
+_(если система была установлена намного раньше)_
 ```Shell
 sudo aptitude update
 ```
