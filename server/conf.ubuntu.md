@@ -8,14 +8,10 @@ sudo wpa_passphrase {name} {password} > /etc/wpa_supplicant.conf
 ```
 где
 
-* __{name}__ — ESSID, идентификатор беспроводной сети, имя сети;
-* __{password}__ — пароль сети;
+* ```{name}``` — ESSID, идентификатор беспроводной сети, имя сети;
+* ```{password}``` — пароль сети;
 
-Открыть файл ```/etc/network/interfaces```:
-```Shell
-sudo nano /etc/network/interfaces
-```
-Добавить строки:
+В файл ```/etc/network/interfaces``` добавить строки:
 ```
 auto wlan0
 iface wlan0 inet dhcp
@@ -25,6 +21,22 @@ post-down sudo killall -q wpa_supplicant
 
 Сохранить и перезагрузиться.
 
+### Для ноутбука
+Чтобы система не уходила в спячку при закрытии крышки в файле ```/etc/systemd/logind.conf```
+раскомментировать и отредактировать строку:
+```
+HandleLidSwitch=ignore
+```
+и перезагрузить или выполнить:
+```Shell
+sudo restart systemd-logind
+```
+
+### Продление сеанса SSH
+В конфиг ```/etc/ssh/ssh_config``` добавить строку
+```
+ServerAliveInterval 180
+```
 
 ### Обновление пакетов
 _(если система была установлена намного раньше)_
@@ -54,7 +66,7 @@ nano ~/.zshrc
 
 ### git
 ```Shell
-aptitude install git
+sudo aptitude install git
 ```
 
 ### dropbox
@@ -65,6 +77,7 @@ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 ~/.dropbox-dist/dropboxd
 ```
 Скопировать ссылку и запустить её в браузере, чтобы привязать аккаунт.
+
 Далее:
 ```Shell
 wget -O ~/dropbox.py "http://www.dropbox.com/download?dl=packages/dropbox.py"
