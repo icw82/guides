@@ -32,11 +32,18 @@ HandleLidSwitch=ignore
 sudo restart systemd-logind
 ```
 
-### Продление сеанса SSH
-В конфиг ```/etc/ssh/ssh_config``` добавить строку
+<!--
+### Продление сеанса SSH (server)
+В конфиг ```/etc/ssh/sshd_config``` добавить строки:
 ```
-ServerAliveInterval 180
+ClientAliveInterval 30
+ClientAliveCountMax 99999
 ```
+Перезапустить сервер
+```
+sudo /etc/init.d/sshd restart
+```
+-->
 
 ### Обновление пакетов
 _(если система была установлена намного раньше)_
@@ -67,6 +74,11 @@ nano ~/.zshrc
 ### git
 ```Shell
 sudo aptitude install git
+```
+
+### emacs
+```Shell
+sudo aptitude install emacs24-nox
 ```
 
 ### dropbox

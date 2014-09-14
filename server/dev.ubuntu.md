@@ -10,9 +10,16 @@
 Это руководство охватывает только мой круг интересов, не претендует
 на универсальность и может оказаться бесполезным для других людей.
 
-### Для начала
+### Node.js
 ```Shell
-sudo su
+sudo aptitude install nodejs
+sudo aptitude install npm
+```
+
+### Nginx
+```Shell
+aptitude install nginx
+/etc/init.d/nginx start
 ```
 
 ### Apache
@@ -28,18 +35,6 @@ Listen 8080
 ```Shell
 /etc/init.d/apache2 restart
 ```
-
-### Node.js
-```Shell
-aptitude install nodejs
-```
-
-### Nginx
-```Shell
-aptitude install nginx
-/etc/init.d/nginx start
-```
-
 
 ### PHP
 
