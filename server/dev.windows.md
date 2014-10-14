@@ -99,7 +99,7 @@ _Скрипты для ручного [запуска](https://github.com/icw82/
 ```conf
 server {
     listen 80;
-    server_name ~^(www\.)?(?<domain>.+?)(\.node)$;
+    server_name ~^(?<domain>.+?)(\.node)$;
 
     location / {
         proxy_set_header X-Real-IP $remote_addr;
@@ -114,7 +114,8 @@ server {
         proxy_redirect off;
     }
 
-    location ~* \.(jpg|gif|png|ico|css|svg|js)$ {
+    location /build/ {
+        index index.html;
         root c:/var/www/apache/$domain;
     }
 }
@@ -135,10 +136,10 @@ server {
 ```conf
 server {
     listen 80;
-    server_name ~^(www\.)?(?<domain>.+?)(\.apache)$;
+    server_name ~^(?<domain>.+?)(\.apache)$;
 
     location / {
-        proxy_pass http://:8080/$domain/$uri$is_args$args;
+        proxy_pass http://127.0.0.1:8080/$domain$uri$is_args$args;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $remote_addr;
@@ -147,7 +148,8 @@ server {
         proxy_read_timeout 180;
     }
 
-    location ~* \.(jpg|gif|png|ico|css|svg|js)$ {
+    location ~* \.(jpg|gif|png|ico|css|svg|js|html)$ {
+        index index.html;
         root c:/var/www/apache/$domain;
     }
 }
@@ -183,11 +185,8 @@ AddType application/x-httpd-php .php
 7. Создать конфиг PHP `c:\server\php\php.ini` с содержимым:
 ```ini
 extension_dir = "c:/server/php/ext/"
-extension=php_curl.dll
 extension=php_gd2.dll
 extension=php_mbstring.dll
-extension=php_pdo.dll
-extension=php_sqlite.dll
 extension=php_sqlite3.dll
 ```
 
