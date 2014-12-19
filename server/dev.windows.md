@@ -23,27 +23,25 @@ nginx + apache (для старых проектов) + node.js (не готов
 
 ### Подготовка
 1. Скачать бинарники и/или установщики:
-  + [nginx][00] → [nginx/Windows-1.7.4][01]
+  + [nginx][nginx] → [nginx/Windows-1.7.4][nginx-file]
+  + [Windows Service Wrapper][wsw] → [winsw-1.16-bin.exe][wsw-file]
   + [VC11 vcredist_x64/86.exe][02] (требуется для работы Апача)
   + [Apache][03] → [httpd-2.4.10-win64-VC11.zip][04]
   + [PHP][05] → [PHP 5.6.0 VC11 x64 Thread Safe][06]
-  + [Python][07] → [Windows X86-64 MSI Installer (2.7.6)][08]
   + [Node.js][09] → [node-v0.10.31-x64.msi][010]
-  + [Windows Service Wrapper][011] → [winsw-1.16-bin.exe][012]
 
-[00]: http://nginx.org/ru/download.html "nginx"
-[01]: http://nginx.org/download/nginx-1.7.4.zip
+[nginx]: http://nginx.org/ru/download.html "nginx"
+[nginx-file]: http://nginx.org/download/nginx-1.7.4.zip
+[wsw]: https://github.com/kohsuke/winsw
+[wsw-file]: http://repo.jenkins-ci.org/releases/com/sun/winsw/winsw/1.16/winsw-1.16-bin.exe
 [02]: http://www.microsoft.com/en-us/download/details.aspx?id=30679 "VC11"
 [03]: http://www.apachelounge.com/download
 [04]: http://www.apachelounge.com/download/VC11/binaries/httpd-2.4.10-win64-VC11.zip
 [05]: http://windows.php.net/download/
 [06]: http://windows.php.net/downloads/releases/php-5.6.0-Win32-VC11-x64.zip
-[07]: http://www.python.org/downloads/
-[08]: http://www.python.org/ftp/python/2.7.6/python-2.7.6.amd64.msi
 [09]: http://nodejs.org/download/
 [010]: http://nodejs.org/dist/v0.10.31/x64/node-v0.10.31-x64.msi
-[011]: https://github.com/kohsuke/winsw
-[012]: http://repo.jenkins-ci.org/releases/com/sun/winsw/winsw/1.16/winsw-1.16-bin.exe
+
 2. Раскидать по папкам:
   + Nginx → `c:\server\nginx`
   + WinSW → `c:\server\nginx` (и переименовать файл в nginx-service.exe)
@@ -212,14 +210,19 @@ c:\> server\Apache24\bin\httpd.exe -k start
 2. Перезапустить Nginx и Apache.
 
 ### Nginx + Python + Django
+  + [Python][python] → [Windows X86-64 MSI Installer (2.7.9)][python-file]
+
+[python]: http://www.python.org/downloads/
+[python-file]: https://www.python.org/ftp/python/2.7.9/python-2.7.9.amd64.msi
+
 1. Установить Python в папку C:\server\python27.
 
 2. К переменой PATH добавить (если нет):
 `C:\server\Python27;C:\server\Python27\Scripts;C:\server\Python27\Lib\site-packages`
 
-3. Следуя [инструкции](https://pypi.python.org/pypi/setuptools#windows-8-powershell), установить setuptools:
-```
-(Invoke-WebRequest https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py).Content | python -
+3. Следуя [инструкции](https://pypi.python.org/pypi/setuptools#windows-powershell-3-or-later), установить setuptools:
+```powershell
+(Invoke-WebRequest https://bootstrap.pypa.io/ez_setup.py).Content | python -
 ```
 
 4. Установить pip:
@@ -231,16 +234,23 @@ easy_install pip
 ```
 pip install virtualenv
 ```
-<!--
-1) Запустил редактор локальной групповой политики
-2) Зашёл в раздел: Локальный компьютер `\Конфигурация компьютера\Административные шаблоны\Компоненты Windows\Windows PowerShell\`
-3) Параметр `Включить выполнение сценариев` был установлен на `Не задана`, поменял на `Включена` (параметры: `Разрешить локальные сценарии...`
+6. Запустить редактор локальной групповой политики `gpedit.msc`
 
-  .\.env\Scripts\activate.ps1
+7. Зашёл в раздел: Локальный компьютер `\Конфигурация компьютера\Административные шаблоны\Компоненты Windows\Windows PowerShell\`
 
--->
+8. Состояние `Включить выполнение сценариев` установить на `Включена` и определить парметр: `Разрешить локальные сценарии...`
+
+9. Созадние .env внутри папки проекта: `virtualenv .env`
+
+10. Активация виртуального окружения: `.\.env\Scripts\activate.ps1`
+
+11. Установка Джанги: `pip install django`
+
+12. `pip freeze > requirements.txt` `pip install -r requirements.txt`
+
+13. Выйти из деректории и создать проект `django-admin startproject projectname`
+
+14. https://docs.djangoproject.com/en/1.7/intro/tutorial01/
 
 
 <!--![alt text](/path/to/img.jpg "Title") -->
-
-### GIT
