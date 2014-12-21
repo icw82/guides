@@ -209,48 +209,46 @@ c:\> server\Apache24\bin\httpd.exe -k start
 
 2. Перезапустить Nginx и Apache.
 
+
 ### Nginx + Python + Django
   + [Python][python] → [Windows X86-64 MSI Installer (2.7.9)][python-file]
 
 [python]: http://www.python.org/downloads/
 [python-file]: https://www.python.org/ftp/python/2.7.9/python-2.7.9.amd64.msi
 
-1. Установить Python в папку C:\server\python27.
+0. Установить Python.
 
-2. К переменой PATH добавить (если нет):
-`C:\server\Python27;C:\server\Python27\Scripts;C:\server\Python27\Lib\site-packages`
+0. Создать переменную среды `PYTHONDIR`, соотвутсвующуую директории, куда установлен Python.
+   Свойства системы — `SystemPropertiesAdvanced.exe`.
 
-3. Следуя [инструкции](https://pypi.python.org/pypi/setuptools#windows-powershell-3-or-later), установить setuptools:
+0. К переменой PATH добавить:
+`%PYTHONDIR%;%PYTHONDIR%\Scripts;%PYTHONDIR%\Lib\site-packages`
+
+0. Следуя [инструкции](https://pypi.python.org/pypi/setuptools#windows-powershell-3-or-later),
+   установить setuptools:
 ```powershell
 (Invoke-WebRequest https://bootstrap.pypa.io/ez_setup.py).Content | python -
 ```
 
-4. Установить pip:
+0. Установить pip:
 ```
 easy_install pip
 ```
 
-5. Установить virtualenv:
+0. Установить virtualenv:
 ```
 pip install virtualenv
 ```
-6. Запустить редактор локальной групповой политики `gpedit.msc`
-
-7. Зашёл в раздел: Локальный компьютер `\Конфигурация компьютера\Административные шаблоны\Компоненты Windows\Windows PowerShell\`
-
-8. Состояние `Включить выполнение сценариев` установить на `Включена` и определить парметр: `Разрешить локальные сценарии...`
-
-9. Созадние .env внутри папки проекта: `virtualenv .env`
-
-10. Активация виртуального окружения: `.\.env\Scripts\activate.ps1`
-
-11. Установка Джанги: `pip install django`
-
-12. `pip freeze > requirements.txt` `pip install -r requirements.txt`
-
-13. Выйти из деректории и создать проект `django-admin startproject projectname`
-
-14. https://docs.djangoproject.com/en/1.7/intro/tutorial01/
+0. В редакторе локальной групповой политики `gpedit.msc`:
+```
+Локальный компьютер
+ → Конфигурация компьютера
+ → Административные шаблоны
+ → Компоненты Windows
+ → Windows PowerShell
+```
+   Состояние `Включить выполнение сценариев` установить на `Включена`
+   и определить парметр: `Разрешить локальные сценарии...`
 
 
 <!--![alt text](/path/to/img.jpg "Title") -->

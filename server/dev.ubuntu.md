@@ -36,6 +36,15 @@ Listen 8080
 /etc/init.d/apache2 restart
 ```
 
+### Python
+
+```Shell
+wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
+
+sudo easy_install pip
+```
+
+
 ### PHP
 
 ### Django
