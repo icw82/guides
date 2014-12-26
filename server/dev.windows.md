@@ -1,8 +1,7 @@
 Установка веб-сервера для разработки
 ====================================
 
-**(не готово)**
-
+<!--
 В настоящем руководстве кратко описан процесс установки веб-сервера
 для разработки на Windows 8.1. Однако инструкция применима также
 и к ранним версиями Windows.
@@ -20,6 +19,7 @@ nginx + apache (для старых проектов) + node.js (не готов
 + Windows Vista SP2
 + Windows Server 2008 R2 SP1
 + Windows Server 2012 / R2
+-->
 
 ### Подготовка
 1. Скачать бинарники и/или установщики:
@@ -48,47 +48,48 @@ nginx + apache (для старых проектов) + node.js (не готов
   + Apache → `c:\server\Apache24`
   + PHP → `c:\server\php`
 
-3. Если не установлен пакет Visual C++ для Visual Studio 2012 Update 4, установить. В лицензионной Windows 8.1 с включенным автоматическим обновлением, пакет уже должен быть установлен;
+3. Если не установлен пакет Visual C++ для Visual Studio 2012 Update 4,
+    установить. В лицензионной Windows 8.1 с включенным автоматическим
+    обновлением, пакет уже должен быть установлен;
 
 4. Создать папку для проектов → `c:\var\www`;
 
 4. Создать папку для проектов, требующих Apache → `c:\var\www\apache`.
 
 5. В файл `c:\Windows\System32\drivers\etc\hosts` добавить строку:
-```
-127.0.0.2 *.apache
-```
-где * — нужное доменное имя.
+    ```
+    127.0.0.2 *.apache
+    ```
+    где * — нужное доменное имя.
 
 ### Nginx
 1. Создать `c:\server\nginx\nginx-service.xml` с содержимым:
-```xml
-<service>
-    <id>Nginx</id>
-    <name>Nginx</name>
-    <description>Nginx service</description>
-    <executable>c:\server\nginx\nginx.exe</executable>
-    <logpath>c:\server\nginx\logs</logpath>
-    <log mode="roll-by-size">
-        <sizeThreshold>10240</sizeThreshold>
-        <keepFiles>2</keepFiles>
-    </log>
-    <startargument></startargument>
-</service>
-```
+    ```xml
+    <service>
+        <id>Nginx</id>
+        <name>Nginx</name>
+        <description>Nginx service</description>
+        <executable>c:\server\nginx\nginx.exe</executable>
+        <logpath>c:\server\nginx\logs</logpath>
+        <log mode="roll-by-size">
+            <sizeThreshold>10240</sizeThreshold>
+            <keepFiles>2</keepFiles>
+        </log>
+        <startargument></startargument>
+    </service>
+    ```
 2. Устанавить сервис:
-```
-c:\server\nginx\nginx-service install
-```
+    ```
+    c:\server\nginx\nginx-service install
+    ```
 
 3. Запустить службу.
-```
-net start nginx
-```
+    ```
+    net start nginx
+    ```
 
 4. Запустить. По адресу http://localhost/ — должно быть приветствие «Welcome to nginx!».
 
-_Скрипты для ручного [запуска](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-start.cmd) и [остановки](https://github.com/icw82/storeroom/blob/master/nginx-windows/nginx-stop.cmd) сервера._
 
 ### Nginx + Node.js
 1. Установить node.js в папку C:\server\nodejs.
@@ -131,27 +132,27 @@ server {
 
 ### Nginx → Apache + PHP
 1. В конфиг `c:\server\nginx\conf\nginx.gonf` добавить блок:
-```conf
-server {
-    listen 80;
-    server_name ~^(?<domain>.+?)(\.apache)$;
+    ```conf
+    server {
+        listen 80;
+        server_name ~^(?<domain>.+?)(\.apache)$;
 
-    location / {
-        proxy_pass http://127.0.0.1:8080/$domain$uri$is_args$args;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_connect_timeout 120;
-        proxy_send_timeout 120;
-        proxy_read_timeout 180;
-    }
+        location / {
+            proxy_pass http://127.0.0.1:8080/$domain$uri$is_args$args;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_connect_timeout 120;
+            proxy_send_timeout 120;
+            proxy_read_timeout 180;
+        }
 
-    location ~* \.(jpg|gif|png|ico|css|svg|js|html)$ {
-        index index.html;
-        root c:/var/www/apache/$domain;
+        location ~* \.(jpg|gif|png|ico|css|svg|js|html)$ {
+            index index.html;
+            root c:/var/www/apache/$domain;
+        }
     }
-}
-```
+    ```
 
 2. Сохранить конфиг
 
@@ -173,20 +174,20 @@ server {
 </Directory>
 ```
 5. В конец конфига дописать:
-```conf
-PHPIniDir "c:/server/php/"
-LoadModule php5_module "c:/server/php/php5apache2_4.dll"
-AddType application/x-httpd-php .php
-```
+    ```conf
+    PHPIniDir "c:/server/php/"
+    LoadModule php5_module "c:/server/php/php5apache2_4.dll"
+    AddType application/x-httpd-php .php
+    ```
 6. Сохранить конфиг
 
 7. Создать конфиг PHP `c:\server\php\php.ini` с содержимым:
-```ini
-extension_dir = "c:/server/php/ext/"
-extension=php_gd2.dll
-extension=php_mbstring.dll
-extension=php_sqlite3.dll
-```
+    ```ini
+    extension_dir = "c:/server/php/ext/"
+    extension=php_gd2.dll
+    extension=php_mbstring.dll
+    extension=php_sqlite3.dll
+    ```
 
 8. Сохранить конфиг
 
@@ -200,12 +201,12 @@ c:\> server\Apache24\bin\httpd.exe -k start
 
 #### Виртуальные хосты Apache
 1. В файле `c:\server\apache\conf\extra\httpd-vhosts.conf` всё заменить на:
-```conf
-<VirtualHost apache.local:8080>
-    DocumentRoot "c:/var/www/apache"
-    ServerName apache.local
-</VirtualHost>
-```
+    ```conf
+    <VirtualHost apache.local:8080>
+        DocumentRoot "c:/var/www/apache"
+        ServerName apache.local
+    </VirtualHost>
+    ```
 
 2. Перезапустить Nginx и Apache.
 
@@ -222,31 +223,32 @@ c:\> server\Apache24\bin\httpd.exe -k start
    Свойства системы — `SystemPropertiesAdvanced.exe`.
 
 0. К переменой PATH добавить:
-`%PYTHONDIR%;%PYTHONDIR%\Scripts;%PYTHONDIR%\Lib\site-packages`
+    `%PYTHONDIR%;%PYTHONDIR%\Scripts;%PYTHONDIR%\Lib\site-packages`
 
 0. Следуя [инструкции](https://pypi.python.org/pypi/setuptools#windows-powershell-3-or-later),
    установить setuptools:
-```powershell
-(Invoke-WebRequest https://bootstrap.pypa.io/ez_setup.py).Content | python -
-```
+    ```powershell
+    (Invoke-WebRequest https://bootstrap.pypa.io/ez_setup.py).Content | python -
+    ```
 
 0. Установить pip:
-```
-easy_install pip
-```
+    ```
+    easy_install pip
+    ```
 
 0. Установить virtualenv:
-```
-pip install virtualenv
-```
+    ```
+    pip install virtualenv
+    ```
+
 0. В редакторе локальной групповой политики `gpedit.msc`:
-```
-Локальный компьютер
- → Конфигурация компьютера
- → Административные шаблоны
- → Компоненты Windows
- → Windows PowerShell
-```
+    ```
+    Локальный компьютер
+     → Конфигурация компьютера
+     → Административные шаблоны
+     → Компоненты Windows
+     → Windows PowerShell
+    ```
    Состояние `Включить выполнение сценариев` установить на `Включена`
    и определить парметр: `Разрешить локальные сценарии...`
 

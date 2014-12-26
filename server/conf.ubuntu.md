@@ -1,5 +1,16 @@
-Памятка по настройке Ubuntu.Server 14.*
+Памятка по настройке Ubuntu.Server 14
 =======================================
+
+### Права доступа и группы
+```Shell
+sudo groupadd admin
+sudo gpasswd -a {USERNAME} admin
+sudo visudo
+```
+* `%sudo` закоментировать;
+* `%admin ALL=(ALL) NOPASSWD: ALL`;
+* Релог.
+
 
 ### Настройка Wi-Fi с WPA/WPA2
 Создать файл с конфигурацией в ```/etc```:
@@ -32,6 +43,25 @@ HandleLidSwitch=ignore
 sudo restart systemd-logind
 ```
 
+### Обновление пакетов
+```Shell
+sudo aptitude update
+```
+
+### emacs
+```Shell
+sudo aptitude install emacs24-nox
+```
+
+### SSH
+Сгенерить ключи в PuTTYgen (если под виндой).
+
+```Shell
+mkdir ~/.ssh
+chmod 700 ~/.ssh
+emacs ~/.ssh/authorized_keys2 (вставить сюда публичный ключ)
+chmod 600 ~/.ssh/authorized_keys2
+```
 <!--
 ### Продление сеанса SSH (server)
 В конфиг ```/etc/ssh/sshd_config``` добавить строки:
@@ -39,20 +69,14 @@ sudo restart systemd-logind
 ClientAliveInterval 30
 ClientAliveCountMax 99999
 ```
-Перезапустить сервер
+Перезапустить сервер:
 ```
 sudo /etc/init.d/sshd restart
 ```
 -->
 
-### Обновление пакетов
-_(если система была установлена намного раньше)_
-```Shell
-sudo aptitude update
-```
-
 ### zsh
-#### Установка
+
 ```Shell
 sudo aptitude install zsh
 sudo chsh -s /bin/zsh root
@@ -62,24 +86,13 @@ exit
 После логина будет автоматически запущен __zsh-newuser-install__.
 Нажать `0` (просто создастся файл .zshrc в домашней директории).
 
-#### Конфигурация
 Открыть файл .zshrc в домашней директории:
 ```Shell
-nano ~/.zshrc
+emacs ~/.zshrc
 ```
-Вставить в этот файл [сие](https://raw.github.com/icw82/storeroom/master/zsh/.zshrc.sh).
+Вставить в этот файл [сие](../storeroom/.zshrc.sh).
 То же самое нужно сделать для остальных пользователей (если нужно).
 Изменения встапят в силу после релога.
-
-### git
-```Shell
-sudo aptitude install git
-```
-
-### emacs
-```Shell
-sudo aptitude install emacs24-nox
-```
 
 ### dropbox
 Актуальная инструкция на сайте [dropbox.com](https://www.dropbox.com/install?os=lnx)
@@ -97,3 +110,12 @@ chmod 755 ~/dropbox.py
 sudo ln -s ~/dropbox.py /usr/local/bin/dropbox
 dropbox start
 ```
+
+### —
+```Shell
+sudo aptitude install htop
+sudo aptitude install mc
+```
+Занятое пространство накопителя `df -h`.
+
+`nginx_dissite + nginx_ensite`
