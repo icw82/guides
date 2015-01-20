@@ -212,10 +212,12 @@ c:\> server\Apache24\bin\httpd.exe -k start
 
 
 ### Nginx + Python + Django
-  + [Python][python] → [Windows X86-64 MSI Installer (2.7.9)][python-file]
+<!--  + [Python][python] → [Windows X86-64 MSI Installer (2.7.9)][python-file]-->
+  + [Python][python] → [Windows x86-64 MSI installer (3.4.2)][python-file]
 
 [python]: http://www.python.org/downloads/
-[python-file]: https://www.python.org/ftp/python/2.7.9/python-2.7.9.amd64.msi
+<!--[python-file]: https://www.python.org/ftp/python/2.7.9/python-2.7.9.amd64.msi-->
+[python-file]: https://www.python.org/ftp/python/3.4.2/python-3.4.2.amd64.msi
 
 0. Установить Python.
 
