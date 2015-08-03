@@ -65,19 +65,20 @@ nginx + apache (для старых проектов) + node.js (не готов
 ### Nginx
 1. Создать `c:\server\nginx\nginx-service.xml` с содержимым:
     ```xml
-    <service>
-        <id>Nginx</id>
-        <name>Nginx</name>
-        <description>Nginx service</description>
-        <executable>c:\server\nginx\nginx.exe</executable>
-        <logpath>c:\server\nginx\logs</logpath>
-        <log mode="roll-by-size">
-            <sizeThreshold>10240</sizeThreshold>
-            <keepFiles>2</keepFiles>
-        </log>
-        <startargument></startargument>
-    </service>
+<service>
+    <id>Nginx</id>
+    <name>Nginx</name>
+    <description>Nginx service</description>
+    <executable>c:\server\nginx\nginx.exe</executable>
+    <logpath>c:\server\nginx\logs</logpath>
+    <log mode="roll-by-size">
+        <sizeThreshold>10240</sizeThreshold>
+        <keepFiles>2</keepFiles>
+    </log>
+    <startargument></startargument>
+</service>
     ```
+
 2. Устанавить сервис:
     ```
     c:\server\nginx\nginx-service install
@@ -174,11 +175,12 @@ server {
 </Directory>
 ```
 5. В конец конфига дописать:
-    ```conf
-    PHPIniDir "c:/server/php/"
-    LoadModule php5_module "c:/server/php/php5apache2_4.dll"
-    AddType application/x-httpd-php .php
-    ```
+   ```
+   PHPIniDir "c:/server/php/"
+   LoadModule php5_module "c:/server/php/php5apache2_4.dll"
+   AddType application/x-httpd-php .php
+   ```
+
 6. Сохранить конфиг
 
 7. Создать конфиг PHP `c:\server\php\php.ini` с содержимым:

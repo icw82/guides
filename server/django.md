@@ -110,7 +110,7 @@ stats = 127.0.0.1:9191
 
 ### Windows
 ```Shell
-virtualenv .\.env
+virtualenv .env
 .\.env\Scripts\activate.ps1
 python -m pip install django
 
