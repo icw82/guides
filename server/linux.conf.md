@@ -1,5 +1,11 @@
-Памятка по настройке Ubuntu.Server 14
-=======================================
+Памятка по настройке Ubuntu.Server
+==================================
+<!--
+    Состояние: бардак
+    Дата: 2017.10.05
+-->
+
+## Установка
 
 ### Права доступа и группы
 ```Shell
@@ -7,9 +13,6 @@ sudo groupadd admin
 sudo gpasswd -a {USERNAME} admin
 sudo visudo
 ```
-* `%sudo` закоментировать;
-* `%admin ALL=(ALL) NOPASSWD: ALL`;
-* Релог.
 
 
 ### Настройка Wi-Fi с WPA/WPA2
@@ -119,3 +122,42 @@ sudo aptitude install mc
 Занятое пространство накопителя `df -h`.
 
 `nginx_dissite + nginx_ensite`
+
+### Nginx
+```Shell
+sudo aptitude install nginx
+sudo /etc/init.d/nginx start
+emacs /etc/nginx/nginx.conf
+```
+
+[nginx.conf](../storeroom/nginx.conf)
+
+
+### Python + pip + virtualenv + uwsgi
+```Shell
+sudo aptitude install build-essential python-dev
+wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
+sudo easy_install pip
+sudo pip install virtualenv
+sudo pip install uwsgi
+```
+
+### git
+```Shell
+sudo aptitude install git
+```
+
+### Node.js
+```Shell
+sudo aptitude install nodejs
+sudo aptitude install npm
+```
+
+
+### Рабочие каталоги
+```
+sudo mkdir /var/www
+sudo chown www-data:www-data /var/www/
+```
+
+## Обновление

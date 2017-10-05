@@ -110,13 +110,10 @@ stats = 127.0.0.1:9191
 
 ### Windows
 ```Shell
-virtualenv .env
-.\.env\Scripts\activate.ps1
-python -m pip install django
+virtualenv env
+.\env\Scripts\activate.ps1
+pip install django
 
-chcp 65001
-pip freeze > requirements.txt
-pip install -r requirements.txt
 
 django-admin startproject core ./
 
@@ -125,6 +122,12 @@ mkdir ./apps | mkdir ./templates | mkdir ./static | mkdir ./media
 ```
 
 `python -m …`
+
+```
+chcp 65001
+pip freeze > requirements.txt
+pip install -r requirements.txt
+```
 
 
 ## Общее

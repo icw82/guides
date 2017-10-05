@@ -25,8 +25,8 @@ nginx + apache (для старых проектов) + node.js (не готов
 1. Скачать бинарники и/или установщики:
   + [nginx][nginx] → [nginx/Windows-1.7.4][nginx-file]
   + [Windows Service Wrapper][wsw] → [winsw-1.16-bin.exe][wsw-file]
-  + [VC11 vcredist_x64/86.exe][02] (требуется для работы Апача)
-  + [Apache][03] → [httpd-2.4.10-win64-VC11.zip][04]
+  + [VC14 vcredist_x64/86.exe][02] (требуется для работы Апача)
+  + [Apache][03] → [httpd-2.4.16-win64-VC14.zip][04]
   + [PHP][05] → [PHP 5.6.0 VC11 x64 Thread Safe][06]
   + [Node.js][09] → [node-v0.10.31-x64.msi][010]
 
@@ -34,9 +34,9 @@ nginx + apache (для старых проектов) + node.js (не готов
 [nginx-file]: http://nginx.org/download/nginx-1.7.4.zip
 [wsw]: https://github.com/kohsuke/winsw
 [wsw-file]: http://repo.jenkins-ci.org/releases/com/sun/winsw/winsw/1.16/winsw-1.16-bin.exe
-[02]: http://www.microsoft.com/en-us/download/details.aspx?id=30679 "VC11"
+[02]: https://www.microsoft.com/ru-RU/download/details.aspx?id=48145 "VC14"
 [03]: http://www.apachelounge.com/download
-[04]: http://www.apachelounge.com/download/VC11/binaries/httpd-2.4.10-win64-VC11.zip
+[04]: http://www.apachelounge.com/download/VC11/binaries/httpd-2.4.16-win64-VC14.zip
 [05]: http://windows.php.net/download/
 [06]: http://windows.php.net/downloads/releases/php-5.6.0-Win32-VC11-x64.zip
 [09]: http://nodejs.org/download/
