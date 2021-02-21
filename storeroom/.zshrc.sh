@@ -89,13 +89,13 @@ fi
 RPROMPT="${gray}%*${reset}"
 
 if [ -f /usr/bin/grc ]; then
- alias gcc="grc --colour=auto gcc"
- alias irclog="grc --colour=auto irclog"
- alias log="grc --colour=auto log"
- alias netstat="grc --colour=auto netstat"
- alias ping="grc --colour=auto ping"
- alias proftpd="grc --colour=auto proftpd"
- alias traceroute="grc --colour=auto traceroute"
+    alias gcc="grc --colour=auto gcc"
+    alias irclog="grc --colour=auto irclog"
+    alias log="grc --colour=auto log"
+    alias netstat="grc --colour=auto netstat"
+    alias ping="grc --colour=auto ping"
+    alias proftpd="grc --colour=auto proftpd"
+    alias traceroute="grc --colour=auto traceroute"
 fi
 
 # Bindings
@@ -103,6 +103,7 @@ fi
 ## Words
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
+bindkey '^[[3;5~' kill-word
 
 # Keypad
 # 0 . Enter
