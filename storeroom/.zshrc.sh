@@ -8,6 +8,7 @@ autoload -U compinit; compinit
 setopt AUTO_CD
 #setopt BRACECCL
 
+
 # История
 HISTFILE=~/.zhistory
 SAVEHIST=8200
@@ -31,15 +32,15 @@ alias gs='git status'
 
 alias grep='grep -E --color=auto'
 alias df='df -h'
+alias gp='git pull'
+
 
 # ФОРМАТ
-
 reset=$'%{\e[m%}'
 gray=$'%{\e[38;05;240m%}'
 blue=$'%{\e[1;38;5;33m%}'
 green=$'%{\e[01;38;05;71m%}'
 orange=$'%{\e[01;38;05;214m%}'
-
 
 if [ "$EUID" -eq 0 ]; then
     PROMPT="${gray}[${orange}%d${gray}] #${reset} "
@@ -62,6 +63,12 @@ if [ -f /usr/bin/grc ]; then
  alias proftpd="grc --colour=auto proftpd"
  alias traceroute="grc --colour=auto traceroute"
 fi
+
+# Bindings
+
+## Words
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
 
 # Keypad
 # 0 . Enter
