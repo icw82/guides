@@ -12,15 +12,16 @@ sudo visudo
 * `%admin ALL=(ALL) NOPASSWD: ALL`;
 * Релог.
 
-
 ### Настройка Wi-Fi с WPA/WPA2
+
 https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 
-
 ### Компиляция nginx
+
 https://www.linuxbabe.com/raspberry-pi/compile-nginx-source-raspbian-jessie
 
 ### HTTPS и HTTP/2
+
 https://certbot.eff.org/#pip-nginx
 
 sudo useradd -r nginx
@@ -71,10 +72,9 @@ tar xvf openssl-1.0.2h.tar.gz
 make
 make install
 
-
 openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096
 ssl_dhparam  /etc/nginx/ssl/dhparam.pem;
 
 ### Редирект на HTTPS
-https://bjornjohansen.no/redirect-to-https-with-nginx
 
+https://bjornjohansen.no/redirect-to-https-with-nginx

@@ -7,8 +7,8 @@ Nginx + uWSGI + Django
 * pip
 * virtualenv
 
-
 ### Linux
+
 ```Shell
 sudo mkdir /tmp/uwsgi
 sudo chown www-data:www-data /tmp/uwsgi
@@ -33,7 +33,7 @@ sudo django-admin startproject core /var/www/test
 sudo emacs /etc/nginx/sites-available/test.conf
 ```
 
-```
+```nginx
 upstream django {
     server unix:/tmp/uwsgi/test.sock;
 }
@@ -61,13 +61,14 @@ server {
 }
 ```
 
-```Shell
+```shell
 sudo ln -s /etc/nginx/sites-available/test.conf /etc/nginx/sites-enabled
 sudo nginx -t
 sudo /etc/init.d/nginx reload
 ```
 
 #### test.uwsgi.ini
+
 ```ini
 [uwsgi]
 uid=www-data
@@ -102,13 +103,11 @@ pythonpath = ./
 stats = 127.0.0.1:9191
 -->
 
-
-
 Запуск:
 `sudo uwsgi --ini /var/www/test/test.uwsgi.ini`
 
-
 ### Windows
+
 ```Shell
 virtualenv env
 .\env\Scripts\activate.ps1
@@ -129,7 +128,6 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 ```
 
-
 ## Общее
 
 * Добавить в `./core/settings/py`: импорт `sys`,
@@ -142,6 +140,7 @@ pip install -r requirements.txt
 * Админ `python manage.py createsuperuser`
 
 * Добавить приложение в INSTALLED_APPS
+
     ```
     LANGUAGE_CODE = 'ru-ru'
     TIME_ZONE = 'Asia/Yekaterinburg'
@@ -150,6 +149,7 @@ pip install -r requirements.txt
 * В файлах, где присутсвуют не-ASCII символы — `# -*- coding: utf-8 -*-`
 
 * Миграция
+
   ```
   python manage.py makemigrations <app_label>
   python manage.py migrate

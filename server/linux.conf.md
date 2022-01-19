@@ -10,6 +10,8 @@ sudo adduser {USERNAME}
 sudo usermod -aG sudo {USERNAME}
 sudo gpasswd -a {USERNAME} admin
 sudo visudo
+
+sudo passwd {USERNAME}
 ```
 
 ### Если нет авторизации по ключам
@@ -58,9 +60,23 @@ sudo apt install language-pack-ru -y
 Базовое
 
 ```Shell
-sudo apt-get install -y emacs-nox zsh htop tmux mc ncdu nmap ranger neofetch \
-    lm-sensors tig sysstat git fail2ban
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install -y python3.9 python3-pip python3.9-venv
 ```
+
+```Shell
+sudo apt install -y snapd emacs-nox zsh htop ncdu neofetch \
+    tmux mc nmap ranger nnn git fail2ban
+
+sudo snap install core; sudo snap refresh core
+```
+
+<!-- tig sysstat fail2ban -->
+
+<!-- lm-sensors -->
+
+<!-- btop musikcube googler rainbowstream (Twitter) wttr ncspot nnn mapscii -->
 
 Для разработки
 
@@ -96,7 +112,6 @@ sudo /etc/init.d/sshd restart
 ## zsh
 
 ```Shell
-sudo aptitude install zsh
 sudo chsh -s /bin/zsh root
 chsh -s /bin/zsh
 exit
@@ -136,13 +151,6 @@ sudo ln -s ~/dropbox.py /usr/local/bin/dropbox
 dropbox start
 ```
 
-## —
-
-```Shell
-sudo aptitude install htop
-sudo aptitude install mc
-```
-
 Занятое пространство накопителя `df -h`.
 
 `nginx_dissite + nginx_ensite`
@@ -150,9 +158,14 @@ sudo aptitude install mc
 ## Nginx
 
 ```Shell
-sudo aptitude install nginx
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+sudo apt-get install nginx
 sudo /etc/init.d/nginx start
 emacs /etc/nginx/nginx.conf
+
+sudo certbot --nginx
 ```
 
 [nginx.conf](../storeroom/nginx.conf)
